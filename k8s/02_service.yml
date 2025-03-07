@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: magi
+  namespace: m324-csbe-birchler 
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+  selector:
+    app: magi
