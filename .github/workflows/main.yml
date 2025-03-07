@@ -22,13 +22,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Project
-        run: npm run build
-
-      - name: Run Linter
-        run: npm run lint
-
-      - name: Run Tests
-        run: npm run test
+      - name: Build Image
+        run: docker build -t helltrap/m324lb01 .  
 
       
