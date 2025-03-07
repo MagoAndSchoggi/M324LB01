@@ -21,6 +21,7 @@
   themeToggle.addEventListener('click', () => {
     setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
   });
+
   let activeUsers = [];
   let typingUsers = [];
 
@@ -29,7 +30,7 @@
     console.log('WebSocket connected!');
     socket.send(JSON.stringify({ type: 'newUser', user: myUser }));
   });
-  
+
   socket.addEventListener('message', (event) => {
     const message = JSON.parse(event.data);
     console.log('WebSocket message:', message);
@@ -47,16 +48,17 @@
         break;
       case 'typing':
         typingUsers = message.users;
+        updateTypingIndicator();
         break;
       default:
         break;
     }
   });
-  
+
   socket.addEventListener('close', (event) => {
     console.log('WebSocket closed.');
   });
-  
+
   socket.addEventListener('error', (event) => {
     console.error('WebSocket error:', event);
   });
@@ -65,6 +67,22 @@
   const displayActiveUsersCount = (users) => {
     const activeUsersCount = document.getElementById('activeUsersCount');
     activeUsersCount.textContent = users.length; // Die Anzahl der aktiven Nutzer anzeigen
+  };
+
+  // Funktion zum Aktualisieren des Typing-Indikators
+  const updateTypingIndicator = () => {
+    const typingIndicator = document.getElementById('typingIndicator');
+    const typingUsersList = document.getElementById('typingUsersList');
+
+    if (typingUsers.length > 0) {
+      // Zeige nur die Namen der Nutzer, die gerade tippen
+      const userNames = typingUsers.map(user => user.name).join(', ');
+      typingUsersList.textContent = userNames; // Namen der Nutzer anzeigen
+      typingIndicator.classList.remove('hidden');
+    } else {
+      // Verstecke den Indikator, wenn niemand tippt
+      typingIndicator.classList.add('hidden');
+    }
   };
 
   // Warten, bis das DOM geladen ist, bevor Event-Listener hinzugefügt werden
@@ -87,6 +105,12 @@
       const message = document.getElementById('messageInput').value;
       socket.send(JSON.stringify({ type: 'message', message, user: myUser }));
       document.getElementById('messageInput').value = '';
+    }
+  });
+
+  document.addEventListener('keyup', (event) => {
+    if (event.key.length === 1 || event.key === 'Enter') {
+      socket.send(JSON.stringify({ type: 'typing', user: null })); // Stop typing indication
     }
   });
 })();
