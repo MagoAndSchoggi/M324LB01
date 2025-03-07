@@ -26,9 +26,11 @@ jobs:
       - name: Build Image
         run: docker build -t mtirx/m324lb01 .  
 
+      - name: Build and Push Docker Image
+        run: |
+          docker push mtirx/m324lb01
+
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Build and Push Docker Image
-        run: |
-          docker push helltrap/m324lb01:latest
+      
