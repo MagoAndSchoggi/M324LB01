@@ -8,6 +8,7 @@
     console.log('WebSocket connected!');
     socket.send(JSON.stringify({ type: 'newUser', user: myUser }));
   });
+  
   socket.addEventListener('message', (event) => {
     const message = JSON.parse(event.data);
     console.log('WebSocket message:', message);
@@ -21,6 +22,7 @@
         break;
       case 'activeUsers':
         activeUsers = message.users;
+        displayActiveUsersCount(activeUsers);
         break;
       case 'typing':
         typingUsers = message.users;
@@ -29,14 +31,22 @@
         break;
     }
   });
+  
   socket.addEventListener('close', (event) => {
     console.log('WebSocket closed.');
   });
+  
   socket.addEventListener('error', (event) => {
     console.error('WebSocket error:', event);
   });
 
-  // Wait until the DOM is loaded before adding event listeners
+  // Funktion zum Anzeigen der Anzahl der aktiven Nutzer
+  const displayActiveUsersCount = (users) => {
+    const activeUsersCount = document.getElementById('activeUsersCount');
+    activeUsersCount.textContent = users.length; // Die Anzahl der aktiven Nutzer anzeigen
+  };
+
+  // Warten, bis das DOM geladen ist, bevor Event-Listener hinzugefügt werden
   document.addEventListener('DOMContentLoaded', (event) => {
     // Send a message when the send button is clicked
     document.getElementById('sendButton').addEventListener('click', () => {
@@ -47,11 +57,11 @@
   });
 
   document.addEventListener('keydown', (event) => {
-    // Only send if the typed in key is not a modifier key
+    // Nur senden, wenn die gedrückte Taste keine Modifikatortaste ist
     if (event.key.length === 1) {
       socket.send(JSON.stringify({ type: 'typing', user: myUser }));
     }
-    // Only send if the typed in key is the enter key
+    // Nur senden, wenn die gedrückte Taste die Enter-Taste ist
     if (event.key === 'Enter') {
       const message = document.getElementById('messageInput').value;
       socket.send(JSON.stringify({ type: 'message', message, user: myUser }));
