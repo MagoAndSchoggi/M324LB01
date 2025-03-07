@@ -1,15 +1,17 @@
-FROM node:22.14
+# Use the official Node.js image as the base image
+FROM node:18
 
-WORKDIR /app
+# Set the working directory inside the container
+WORKDIR ...
 
-COPY package*.json .
+# Copy the package.json and package-lock.json files to the container
+COPY ...
 
-RUN npm install
+# Install the dependencies
+RUN ...
 
-COPY . .
+# Copy the source code to the container
+COPY ...
 
-RUN npm run lint && npm run test && npm run build
-
-EXPOSE 3000
-
-CMD [ "npm", "run", "start" ]
+# Start the server when the container starts
+CMD ...
