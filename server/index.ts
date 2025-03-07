@@ -45,11 +45,11 @@ if (env !== 'test') {
   startServer(serverPort);
 }
 
-const waitForSocketState = (socket: WebSocket, state: WebSocket['readyState']): Promise<void> => {
+const waitForSocketState = (socket: WebSocket, state: number) => {
   return new Promise(function (resolve) {
     setTimeout(function () {
       if (socket.readyState === state) {
-        resolve();
+        resolve(undefined);
       } else {
         waitForSocketState(socket, state).then(resolve);
       }

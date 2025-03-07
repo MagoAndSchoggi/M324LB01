@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
     "@types/connect-livereload": "^0.6.0",
     "@types/express": "^4.17.17",
     "@types/http-server": "^0.12.1",
@@ -26,11 +25,10 @@
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "connect-livereload": "^0.6.1",
-    "eslint": "^9.21.0",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^26.6.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "globals": "^16.0.0",
     "livereload": "^0.9.3",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
@@ -38,8 +36,7 @@
     "run-script-os": "^1.1.6",
     "ts-jest": "^28.0.7",
     "ts-node": "^10.9.1",
-    "typescript": "^4.7.4",
-    "typescript-eslint": "^8.26.0"
+    "typescript": "^4.7.4"
   },
   "dependencies": {
     "express": "^4.18.2",
