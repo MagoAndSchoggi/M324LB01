@@ -1,5 +1,26 @@
 (async () => {
   const myUser = await generateRandomUser();
+  const themeToggle = document.getElementById('themeToggle');
+  const chatContainer = document.getElementById('chatContainer');
+  const messages = document.getElementById('messages');
+
+  function setTheme(mode) {
+    document.body.classList.toggle('dark', mode === 'dark');
+    document.body.classList.toggle('light', mode === 'light');
+    chatContainer.classList.toggle('dark:bg-gray-800', mode === 'dark');
+    chatContainer.classList.toggle('bg-white', mode === 'light');
+    messages.classList.toggle('dark:bg-gray-900', mode === 'dark');
+    messages.classList.toggle('bg-gray-100', mode === 'light');
+    localStorage.setItem('theme', mode);
+    themeToggle.textContent = mode === 'dark' ? '☀️' : '🌙';
+  }
+
+  const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  setTheme(savedTheme);
+
+  themeToggle.addEventListener('click', () => {
+    setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+  });
   let activeUsers = [];
   let typingUsers = [];
 
