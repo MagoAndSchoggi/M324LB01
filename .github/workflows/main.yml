@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: Build Image
-        run: docker build -t mtirx/m324lb01:latest .  
+        run: docker build -t mtirx/m324lb01 .  
 
       - name: Check out repository code
         uses: actions/checkout@v4
