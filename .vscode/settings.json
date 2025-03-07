@@ -1,4 +1,8 @@
 {
     "jest.jestCommandLine": "yarn",
-    "jest.rootPath": "."
+    "jest.rootPath": ".",
+    "eslint.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
 }
