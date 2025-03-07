@@ -10,7 +10,7 @@
     <script src="/utils.js"></script>
     <script src="/script.js" defer></script>
   </head>
-  <body class="light bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <body class="bg-gray-100 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
     <div class="w-full h-screen flex justify-center items-center p-4">
       <div class="max-w-2xl w-full md:w-3/4 lg:w-2/4 bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex flex-col h-full transition-colors duration-300" id="chatContainer">
         <div class="bg-blue-600 dark:bg-blue-800 px-6 py-4 flex justify-between items-center">
@@ -18,14 +18,17 @@
           <button id="themeToggle" class="text-white bg-gray-700 dark:bg-gray-600 px-3 py-1 rounded-full">🌙</button>
         </div>
 
-        <!-- Anzeige der aktiven Nutzeranzahl -->
-        <div class="bg-gray-200 px-4 py-2" id="activeUsersSection">
-          <p class="text-sm font-bold text-gray-600">Aktive Nutzer: <span id="activeUsersCount">0</span></p>
+        <div class="bg-gray-200 px-4 py-2 dark:bg-gray-700" id="activeUsersSection">
+          <p class="text-sm font-bold text-gray-600 dark:text-gray-300">Aktive Nutzer: <span id="activeUsersCount">0</span></p>
         </div>
 
         <div class="flex-grow flex flex-col justify-start p-4 gap-4 overflow-y-auto bg-gray-100 dark:bg-gray-900 transition-colors duration-300" id="messages"></div>
 
-        <div class="bg-gray-100 px-4 py-4 flex items-center rounded-t">
+        <div id="typingIndicator" class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 italic hidden">
+          <span id="typingUsersList"></span> tippt...
+        </div>
+
+        <div class="bg-gray-100 px-4 py-4 flex items-center rounded-t dark:bg-gray-800">
           <input
             id="messageInput"
             type="text"
